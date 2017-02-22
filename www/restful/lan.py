@@ -31,6 +31,7 @@ def get_one_week_userdata_tenmin(lanid, username, begin):
 	result = {}
 	result['begin'] = begindate.strftime('%Y-%m-%d %H:%M:%S')
 	result['end'] = enddate.strftime('%Y-%m-%d %H:%M:%S')
+	result['username'] = username 
 	dbdata = getdbdata(lanid, begindate, enddate)
 	for index in range(0,6*24*7):
 		t = (begindate + timedelta(minutes = 10) * index).strftime('%Y-%m-%d %H:%M:%S')
@@ -55,6 +56,7 @@ def get_one_week_userdata_tenmin(lanid, username, begin):
 
 def merge2halfhour(rawdata):
 	result = {}
+	result['username'] = rawdata['username']
 	result['begin'] = rawdata['begin']
 	result['end'] = (datetime.strptime(rawdata['end'], ('%Y-%m-%d %H:%M:%S')) + timedelta(minutes = 30, hours = 23)).strftime('%Y-%m-%d %H:%M:%S') 
 	begin = datetime.strptime(rawdata['begin'], ('%Y-%m-%d %H:%M:%S')) 

@@ -1,10 +1,15 @@
 import web
+import lan
+urls = ('/api/userdata/.*', 'userdata')
 
-urls = {'/.*', 'index',}
 
-class index:
+#class weekdata:
+#	def GET(self):
+		
+class userdata:
 	def GET(self):
-		return "hello"
+		user = web.ctx.path.split('/')[-1]
+		return lan.getweek('304', user, 1) 
 
 app = web.application(urls, globals())
 application = app.wsgifunc()
